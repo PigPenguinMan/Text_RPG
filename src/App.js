@@ -1,23 +1,29 @@
 import logo from './logo.svg';
-import './App.css';
+
 import { useEffect, useState } from 'react';
-import Main from './component/main';
-import { DataProvider } from './data/context';
+
+import { DataConsumer, DataProvider } from './data/context';
+import Main from './page/main';
+import { Routes, Route } from 'react-router-dom';
+import Navbar from './component/navbar';
+import Character from './page/character';
+import Gear from './page/gear';
+import Inventory from './page/inventory';
 
 function App() {
-  const [name,setName] =useState(null);
 
-  // useEffect(()=>{
-  //   fetch('http://localhost:8002/api')
-  //   .then(res=>res.json())
-  //   .then(data=>console.log(data))
-    // .then(data=>setName({name:data.name}))
-  // },[])
   return (
     <div className="App">
       <DataProvider>
+        <Routes>
+          <Route path='/' element={<Navbar />}>
+            <Route path='/' element={<Main />}/>
+            <Route path='/character' element={<Character/>}/>
+            <Route path='/gear' element={<Gear/>}/>
+            <Route path='/inventory' element={<Inventory/>}/>
+          </Route>
+        </Routes>
 
-      <Main></Main>
       </DataProvider>
     </div>
   );

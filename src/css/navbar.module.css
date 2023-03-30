@@ -1,0 +1,30 @@
+.GNB {
+    position: relative;
+    display: flex;
+    background-color: gray;
+    justify-content: center;
+    top: 0;
+}
+
+
+.GNB div{
+    margin: 3px 20px;
+}
+.main {
+    
+}
+.character {
+    
+}
+
+.gear {
+
+}
+
+.inventory {
+
+}
+
+.battle {
+
+}
