@@ -21,7 +21,7 @@ app.get('/api/monster', (req, res) => {
         if (err) {
             throw err;
         } else {
-            const sql = 'SELECT * FROM monster';
+            const sql = 'select * from monster';
             conn.query(sql, (err, rows, field) => {
                 res.send(rows);
             });
@@ -36,23 +36,9 @@ app.get('/api/user',(req,res)=>{
         if (err){
             throw err;
         } else {
-            const sql = 'SELECT * FROM user';
+            const sql = 'select * from user';
             conn.query(sql , (err,rows,field)=>{
                 res.send(rows);
-            })
-            conn.release();
-        }
-    })
-})
-
-app.get('/api/item' ,(req,res)=>{
-    pool.getConnection((err,conn)=>{
-        if (err){
-            throw err ;
-        } else {
-            const sql = 'SELECT * FROM item';
-            conn.query(sql, (err,rows,field)=>{
-                res.json(rows);
             })
             conn.release();
         }
@@ -62,10 +48,10 @@ app.get('/api/item' ,(req,res)=>{
 // 소버에서 무기데이터 불러오기 
 app.get('/api/weapon',(req,res)=>{
     pool.getConnection((err,conn)=>{
-        if (err){   
+        if (err){
             throw err;
         } else {
-            const sql = 'SELECT * FROM weapon'
+            const sql = 'select * from weapon';
             conn.query(sql , (err,rows,field)=>{
                 res.send(rows);
             })
@@ -80,7 +66,7 @@ app.get('/api/armour',(req,res)=>{
         if (err){
             throw err;
         } else {
-            const sql = 'SELECT * FROM armour';
+            const sql = 'select * from armour';
             conn.query(sql , (err,rows,field)=>{
                 res.send(rows);
             })
@@ -88,25 +74,3 @@ app.get('/api/armour',(req,res)=>{
         }
     })
 })
-
-// 유저 인벤토리 불러오기 
-app.get('/api/inventory/:userID',(req,res)=>{
-    const userID = req.params.userID
-    pool.getConnection((err,conn)=>{
-        if (err){
-            throw err ;
-        } else {
-            const sql = 'SELECT * FROM item JOIN inventory ON item.id = inventory.item_id WHERE inventory.user_id = ?';
-            conn.query(sql,[userID],(err,rows,field)=>{
-                if (err){
-                    throw err ;
-                } else {
-                    res.json(rows)
-                }
-            })
-            conn.release();
-        }
-    })
-})
-
-// 

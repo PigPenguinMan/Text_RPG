@@ -9,7 +9,6 @@ import Navbar from './component/navbar';
 import Character from './page/character';
 import Gear from './page/gear';
 import Inventory from './page/inventory';
-import Splash from './page/splash';
 
 function App() {
 
@@ -17,12 +16,11 @@ function App() {
     <div className="App">
       <DataProvider>
         <Routes>
-          <Route path='/' element={<Splash/>}/>
-          <Route path='/main' element={<Navbar />}>
-            <Route path='/main' element={<Main />}/>
-            <Route path='/main/character' element={<Character/>}/>
-            <Route path='/main/gear' element={<Gear/>}/>
-            <Route path='/main/inventory' element={<Inventory/>}/>
+          <Route path='/' element={<Navbar />}>
+            <Route path='/' element={<Main />}/>
+            <Route path='/character' element={<Character/>}/>
+            <Route path='/gear' element={<Gear/>}/>
+            <Route path='/inventory' element={<Inventory/>}/>
           </Route>
         </Routes>
 

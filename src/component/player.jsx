@@ -21,7 +21,6 @@ const Player = (props) => {
     // console.log('weapons',weapons);
     return ( 
         <div>
-            <div>id : {player.id}</div>
             <div>이름 : {player.name}</div>
             <div>레벨 : {player.level}</div>
             <div>체력 : {player.hp}</div>
