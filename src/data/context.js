@@ -1,6 +1,12 @@
 import axios from "axios";
 
-const { createContext, useState, useEffect } = require("react");
+import { createContext,useState,useEffect } from "react";
+import CryptoJS from 'crypto-js'
+// const crypto = require('crypto');
+// polyfill 에러 발생 
+// https://velog.io/@fgprjs/JS-Crypto-Module-Build-Module-Not-Found-Error 참고
+// create-react-app으로 만들면 사실상 사용하기 힘들다고 판단 
+
 
 const DataContext = createContext();
 
@@ -10,6 +16,19 @@ const DataProvider = ({ children }) => {
     const [weapons, setWeapons] = useState([])
     const [isCallStat, setIsCallStat] = useState(false);
     const [armour ,setArmour] = useState([])
+    
+    const [user_id, setUser_id] = useState();
+    const [user_pw, setUser_pw] = useState();
+    const [user_name, setUser_name] = useState();
+    // 회원가입때 사용하는 변수 
+    const [login_id,setLogin_id] =useState();
+    const [login_pw,setLogin_pw] = useState();
+    const [login_name,setLogin_name] = useState();
+    // 암호화에 사용할 salt키
+    const [salt,setSalt]  =useState(Math.floor(Math.random()*100000));
+    // hash된 비밀번호 
+    const [hashed_password,setHashed_password]= useState()
+
     // 게임데이터를 불러오는 함수 
     const getGameData = async () => {
         const playerResponse = await axios.get('/api/user');
@@ -22,9 +41,7 @@ const DataProvider = ({ children }) => {
         setArmour(armourResponse.data)
 
         const monsterResponse = await axios.get('/api/monster');
-        setMonster(monsterResponse.data[0]);
-
-        
+        setMonster(monsterResponse.data[0]);        
     }
       // 장비와 스텟의 합을 구하는 함수
       const totalStatus = () => {
@@ -45,8 +62,8 @@ const DataProvider = ({ children }) => {
 
   
     const value = {
-        state: { player, monster, weapons,isCallStat },
-        action: { setPlayer, setMonster, setWeapons,totalStatus,setIsCallStat }
+        state: { player, monster, weapons,isCallStat ,login_id,login_pw , user_id,user_pw,user_name,salt,hashed_password,login_name},
+        action: { setPlayer, setMonster, setWeapons,totalStatus,setIsCallStat,setLogin_id,setLogin_pw,setUser_id,setUser_pw,setUser_name ,setHashed_password,setLogin_name}
     };
    
     return (
