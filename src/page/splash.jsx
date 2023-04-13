@@ -28,12 +28,12 @@ const Splash = () => {
     }
   
     const test = ()=>{
-        const salt =CryptoJS.enc.Utf8.parse ('85631');
+        const salt =CryptoJS.lib.WordArray.random(16);
         const iv=  CryptoJS.enc.Hex.parse('352ca9f2d54636669d9c51919634c806');
-        const hash = 'g8fLqwYiukQq61exCzvF7g'
-        const decrypt = CryptoJS.AES.decrypt(hash,salt,{iv}).toString(CryptoJS.enc.Utf8);
-        const plain = decrypt.toString(CryptoJS.enc.Utf8)
-        console.log(decrypt);
+        const hashed_pw = 'g8fLqwYiukQq61exCzvF7g'
+        const decrypt = CryptoJS.AES.decrypt(hashed_pw,salt,{iv}).toString(CryptoJS.enc.Utf8);
+        const plain = decrypt.toString()
+        console.log(salt);
         // const pw = 'testpw10';
         // const encrypt = CryptoJS.AES.encrypt(pw,salt,iv).toString()
         // console.log(encrypt);

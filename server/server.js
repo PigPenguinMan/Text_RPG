@@ -83,7 +83,7 @@ app.post('/api/user',(req,res)=>{
         if (err){
             throw err ;
         } else {
-            const userSql = 'insert into user (login_id ,name,gender) values (?,?,?)';
+            const userSql = 'INSERT INTO user(login_id,name,gender) values (?,?,?)';
             const login_id = req.body.login_id
             const user_name = req.body.user_name;
             const gender = req.body.gender ;
@@ -92,24 +92,23 @@ app.post('/api/user',(req,res)=>{
                 if(err){
                     throw err ;
                 } else {
-                    const authSql = 'INSERT INTO user_auth(user_id,login_id,salt,hashed_password,iv) VALUES (?,?,?,?,?)';
-                    const user_id =result.insertId;
+                    const authSql = 'INSERT INTO user_auth(login_id,salt,hashed_password,iv) VALUES (?,?,?,?)';
                     const login_id = req.body.login_id;
                     const salt = req.body.salt;
                     const hashed_password = req.body.hashed_password;
                     const iv = req.body.iv
-                    const authParams = [user_id,login_id,salt,hashed_password,iv];
+                    const authParams = [login_id,salt,hashed_password,iv];
                     conn.query(authSql,authParams,(err,result)=>{
                         if(err){
                             throw err ;
                         } else {
                             res.send(result);
                             console.log('등록 성공');
+                            conn.release();
                         }
                     });
                 } 
             });
-            conn.release();
         }
     });
 });

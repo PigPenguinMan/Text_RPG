@@ -25,7 +25,11 @@ const DataProvider = ({ children }) => {
     const [login_pw,setLogin_pw] = useState();
     const [login_name,setLogin_name] = useState();
     // 암호화에 사용할 salt키
-    const [salt,setSalt]  =useState(Math.floor(Math.random()*100000));
+    /** 수정필요 현재 단순문자열 => 배열로 변경해야함
+     *  CrpytoJS.lib.wordArray.random(16);사용 
+     * 
+     */
+    const [salt,setSalt]  =useState(CryptoJS.lib.WordArray.random(16));
     // hash된 비밀번호 
     const [hashed_password,setHashed_password]= useState()
 
@@ -63,7 +67,7 @@ const DataProvider = ({ children }) => {
   
     const value = {
         state: { player, monster, weapons,isCallStat ,login_id,login_pw , user_id,user_pw,user_name,salt,hashed_password,login_name},
-        action: { setPlayer, setMonster, setWeapons,totalStatus,setIsCallStat,setLogin_id,setLogin_pw,setUser_id,setUser_pw,setUser_name ,setHashed_password,setLogin_name}
+        action: { setPlayer, setMonster, setWeapons,totalStatus,setIsCallStat,setLogin_id,setLogin_pw,setUser_id,setUser_pw,setUser_name ,setHashed_password,setLogin_name,setSalt}
     };
    
     return (
