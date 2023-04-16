@@ -7,42 +7,47 @@ import DataContext from '../data/context';
 import CryptoJS from 'crypto-js'
 const Splash = () => {
     const {state,action} =useContext(DataContext);
+    const [input_id,setInput_id] =useState();
+    const [input_pw,setInput_pw] =useState()
     const navigate = useNavigate()
    
     const login = async()=>{
         if(state.login_id && state.login_pw){
             const url = '/api/login';
-            const login_id = state.login_id;
+            const login_id = state.login_id
             const login_pw = state.login_pw;
             const data = {
                 login_id,
                 login_pw
             }
             const config = {
-                headers : {"Content-type" : 'apllication/json'}
+                headers: {
+                    'Content-Type': 'application/json'
+                  }
             };
+            // 04/16 여기서 끝
+            console.log('data',data);
+            console.log();
             return await axios.post(url,data,config)
         }else { 
-            console.log('id 와 pw중 등록하지않은게 있습니다');
+            console.log('id 와 pw중 입력하지않은게 있습니다');
         }        
     }
   
     const test = ()=>{
-        const salt =CryptoJS.lib.WordArray.random(16);
-        const iv=  CryptoJS.enc.Hex.parse('352ca9f2d54636669d9c51919634c806');
-        const hashed_pw = 'g8fLqwYiukQq61exCzvF7g'
-        const decrypt = CryptoJS.AES.decrypt(hashed_pw,salt,{iv}).toString(CryptoJS.enc.Utf8);
-        const plain = decrypt.toString()
-        console.log(salt);
-        // const pw = 'testpw10';
-        // const encrypt = CryptoJS.AES.encrypt(pw,salt,iv).toString()
-        // console.log(encrypt);
+        const shaPW = CryptoJS.SHA256(state.login_pw).toString(CryptoJS.enc.Hex);
+        console.log('f0d49121f0692129de444074ebe67fe21f62a3973dfbdcc411ed5a6c6ea01424'
+        );
+        console.log('shaPW',shaPW);
+        if (shaPW == 'f0d49121f0692129de444074ebe67fe21f62a3973dfbdcc411ed5a6c6ea01424'
+        ) console.log('ok');
+
     }
-    const loginHandler =(e)=>{
+    const loginHandler =async(e)=>{
         e.preventDefault()
         try {
-            login()
-            // navigate('/main')
+            await login()
+            navigate('/main')
         } catch (err) {
             console.log('로그인실패' ,err);
         }
@@ -55,8 +60,8 @@ const Splash = () => {
            <button onClick={()=>test()}>test</button>
             <div className={styles.loginbox} onSubmit={loginHandler}>
                 <form className={styles.loginform} >
-                   ID <input type="text" value={state.login_id} onChange={(e)=>action.setLogin_id(e.target.value)}/>
-                   PW <input type="text" value={state.login_pw} onChange={(e)=>action.setLogin_pw(e.target.value)}/>
+                   ID <input type="text" value={input_id} onChange={(e)=>action.setLogin_id(e.target.value)}/>
+                   PW <input type="password" value={input_pw} onChange={(e)=>action.setLogin_pw(e.target.value)}/>
                    <button onClick={()=>navigate('/signup')}> 회원가입</button>
                    <button type='submit'> submit</button>
                 </form>
