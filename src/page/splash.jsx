@@ -27,7 +27,6 @@ const Splash = () => {
             };
             // 04/16 여기서 끝
             console.log('data',data);
-            console.log();
             return await axios.post(url,data,config)
         }else { 
             console.log('id 와 pw중 입력하지않은게 있습니다');

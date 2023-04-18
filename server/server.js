@@ -2,6 +2,8 @@ const express = require('express');
 const app = express();
 const PORT = process.env.PORT || 3001;
 const pool = require('./config/db');
+const CryptoJS = require('crypto-js');
+
 const bodyparser = require('body-parser')
 app.get('/', (req, res) => {
     res.send('Response Complete')
