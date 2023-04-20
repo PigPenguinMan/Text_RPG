@@ -20,6 +20,9 @@ const DataProvider = ({ children }) => {
     const [user_id, setUser_id] = useState();
     const [user_pw, setUser_pw] = useState();
     const [user_name, setUser_name] = useState();
+    // 장비에 사용하는 변수 
+    const [equipment,setEquipment] = useState([]);
+
     // 회원가입때 사용하는 변수 
     const [login_id,setLogin_id] =useState();
     const [login_pw,setLogin_pw] = useState();
@@ -29,7 +32,7 @@ const DataProvider = ({ children }) => {
      *  CrpytoJS.lib.wordArray.random(16);사용 
      * 
      */
-    const [salt,setSalt]  =useState(CryptoJS.lib.WordArray.random(16));
+    // const [salt,setSalt]  =useState(CryptoJS.lib.WordArray.random(16));
     // hash된 비밀번호 
     const [hashed_password,setHashed_password]= useState()
 
@@ -47,6 +50,12 @@ const DataProvider = ({ children }) => {
         const monsterResponse = await axios.get('/api/monster');
         setMonster(monsterResponse.data[0]);        
     }
+
+    // 04/20 장비데이터 불러오기 구현중 
+    const getEquipment =async ()=>{
+        const equipResponse = await axios.get('/api/item/equipment');
+        setEquipment(equipResponse.data)
+    }
       // 장비와 스텟의 합을 구하는 함수
       const totalStatus = () => {
         let atk = 0;
@@ -63,11 +72,11 @@ const DataProvider = ({ children }) => {
         getGameData()
     },[])
    
-
+    
   
     const value = {
-        state: { player, monster, weapons,isCallStat ,login_id,login_pw , user_id,user_pw,user_name,salt,hashed_password,login_name},
-        action: { setPlayer, setMonster, setWeapons,totalStatus,setIsCallStat,setLogin_id,setLogin_pw,setUser_id,setUser_pw,setUser_name ,setHashed_password,setLogin_name,setSalt}
+        state: { player, monster, weapons,isCallStat ,login_id,login_pw , user_id,user_pw,user_name,hashed_password,login_name,armour,equipment},
+        action: { setPlayer, setMonster, setWeapons,totalStatus,setIsCallStat,setLogin_id,setLogin_pw,setUser_id,setUser_pw,setUser_name ,setHashed_password,setLogin_name,getEquipment}
     };
    
     return (

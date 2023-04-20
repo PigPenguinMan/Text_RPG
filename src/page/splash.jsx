@@ -10,7 +10,6 @@ const Splash = () => {
     const [input_id,setInput_id] =useState();
     const [input_pw,setInput_pw] =useState()
     const navigate = useNavigate()
-   
     const login = async()=>{
         if(state.login_id && state.login_pw){
             const url = '/api/login';
@@ -45,8 +44,7 @@ const Splash = () => {
     const loginHandler =async(e)=>{
         e.preventDefault()
         try {
-            await login()
-            navigate('/main')
+            await login().then(navigate('/main'));
         } catch (err) {
             console.log('로그인실패' ,err);
         }

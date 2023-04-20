@@ -131,9 +131,7 @@ app.post('/api/login',bodyparser.json() ,(req, res) => {
             sqlMessage: "You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '?' at line 1", 오류 발생
             SELECT 에서 ? 를 사용해 값이 동적으로 바인딩됨 params배열에 값을 제대로 넣어야함
             */
-            console.log(login_id);
             const loginParams = [login_id];
-            console.log(loginParams)
             conn.query(sql, loginParams, (err, rows, fields) => {
                 conn.release(); // 쿼리가 완료된후 conn해제
                 if (err) {
@@ -145,7 +143,6 @@ app.post('/api/login',bodyparser.json() ,(req, res) => {
                         const hashed_password = rows[0].hashed_password;
                         // 암호화된 비밀번호 해독
                         const checkPw = CryptoJS.SHA256(login_pw).toString(CryptoJS.enc.Hex)
-
                         if (hashed_password === checkPw) {
                             res.status(200).send('로그인 성공');
                         } else {
@@ -155,5 +152,27 @@ app.post('/api/login',bodyparser.json() ,(req, res) => {
                 }
             })
         }
+    })
+})
+
+// 유저 장비 체크 
+app.get('/api/item/equipment',(req,res)=>{
+    pool.getConnection((err,conn)=>{
+        if(err){
+            throw err
+        } else {
+            // 유저 아이디가 ? 인 유저의 장비창에 있는 아이템 불러오기
+            const sql = 'SELECT item.name FROM item JOIN equipment ON item.id = equipment.item_id WHERE user_id = ?';
+            const equipParam = [req.body.user_id];
+            console.log('equipParam',equipParam);
+            conn.query(sql,equipParam,(err,result)=>{
+                if (err){
+                    throw err
+                } else {
+                    res.send(result);
+                }
+                conn.release()
+            })
+    }
     })
 })

@@ -8,8 +8,15 @@ import DataContext from "../data/context";
 
 const Main = () => {
     const {state , action} = useContext(DataContext)
-    const [turn, setTurn] = useState(0);
-    console.log(state.player);
+    
+    useEffect(()=>{
+        action.setUser_id(state.player.id)
+        action.getEquipment()
+    },[])
+
+    console.log('player',state.player);
+    console.log('player.id',state.user_id);
+    console.log('equipment',state.equipment);
     // const progress= ()=>{
     //     console.log(`${monster.name} 에게 ${player.attack_power}만큼 피해를 줬습니다`);
     //     monster.hp -= player.attack_power

@@ -1,0 +1,67 @@
+.current{
+    position: relative;
+    display: flex;
+    width: 600px;
+    height: 650px;
+    background-color: lightgray;
+    justify-content: center;
+    top: 30px;
+    text-align: center;
+}
+
+.Head{
+    background-color: dimgray;
+    width: 100px ;
+    height: 100px ;
+    border: 1px solid black;
+    position: absolute;
+    top: 50px;
+}
+
+.Body{
+    background-color: dimgray;
+    width: 100px ;
+    height: 100px ;
+    border: 1px solid black;
+    position: absolute;
+    top: 250px;
+}
+
+.MainHand{
+    background-color: dimgray;
+    width: 100px ;
+    height: 100px ;
+    border: 1px solid black;
+    position: absolute;
+    top: 195px;
+    left: 75px;
+}
+
+.OffHand{
+    background-color: dimgray;
+    width: 100px ;
+    height: 100px ;
+    border: 1px solid black;
+    position: absolute;
+    top: 195px;
+    right: 75px;
+}
+
+.Gloves{
+    background-color: dimgray;
+    width: 100px ;
+    height: 100px ;
+    border: 1px solid black;
+    position: absolute;
+    top: 400px;
+    left: 75px;
+}
+
+.Boots{
+    background-color: dimgray;
+    width: 100px ;
+    height: 100px ;
+    border: 1px solid black;
+    position: absolute;
+    bottom: 100px;
+}
