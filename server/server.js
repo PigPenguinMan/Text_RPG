@@ -162,8 +162,9 @@ app.get('/api/item/equipment',(req,res)=>{
             throw err
         } else {
             // 유저 아이디가 ? 인 유저의 장비창에 있는 아이템 불러오기
+            const user_id = [req.query.user_id];
             const sql = 'SELECT item.name FROM item JOIN equipment ON item.id = equipment.item_id WHERE user_id = ?';
-            const equipParam = [req.body.user_id];
+            const equipParam = [user_id];
             console.log('equipParam',equipParam);
             conn.query(sql,equipParam,(err,result)=>{
                 if (err){

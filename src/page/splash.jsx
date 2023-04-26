@@ -24,7 +24,6 @@ const Splash = () => {
                     'Content-Type': 'application/json'
                   }
             };
-            // 04/16 여기서 끝
             console.log('data',data);
             return await axios.post(url,data,config)
         }else { 
