@@ -6,27 +6,27 @@ const CurrentGear = (props) => {
         <div className={styles.current}>
             <div className={styles.Head}>
                 Head
-                {slots.Head.length > 0 && slots.Head[0].name}
+                {slots.head.length > 0 && slots.head[0].name}
                 </div>
             <div className={styles.Body}>
                 Body
-                {slots.Body.length > 0 && slots.Body[0].name}
+                {slots.body.length > 0 && slots.body[0].name}
                 </div>
             <div className={styles.MainHand}>
                 Main-Hand
-                {slots['Main-Hand'].length > 0 && slots['Main-Hand'][0].name}
+                {slots['main-hand'].length > 0 && slots['main-hand'][0].name}
                 </div>
             <div className={styles.OffHand}>
                 Off-Hand
-                {slots['Off-Hand'].length > 0 && slots['Off-Hand'][0].name}
+                {slots['off-hand'].length > 0 && slots['off-hand'][0].name}
                 </div>
             <div className={styles.Gloves}>
                 Gloves
-                {slots.Gloves.length > 0 && slots.Gloves[0].name}
+                {slots.gloves.length > 0 && slots.gloves[0].name}
                 </div>
             <div className={styles.Boots}>
                 Boots
-                {slots.Boots.length > 0 && slots.Boots[0].name}
+                {slots.boots.length > 0 && slots.boots[0].name}
                 </div>
         </div>
      );

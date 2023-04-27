@@ -28,13 +28,13 @@ const DataProvider = ({ children }) => {
     const [login_pw, setLogin_pw] = useState();
     const [login_name, setLogin_name] = useState();
     const equipSlots = {
-        Head: [],
-        Body: [],
+        head: [],
+        body: [],
         // '' 를 안붙이면 JS에서 두개의 단어로 읽어 문자열로 만들어줘야함
-        'Main-Hand': [],
-        'Off-Hand': [],
-        Gloves: [],
-        Boots: []
+        'main-hand': [],
+        'off-hand': [],
+        gloves: [],
+        boots: []
     };
     // 암호화에 사용할 salt키
     /** 수정필요 현재 단순문자열 => 배열로 변경해야함
@@ -68,9 +68,17 @@ const DataProvider = ({ children }) => {
         const equipResponse = await axios.get('/api/item/equipment', { params: { user_id: user_id } });
         setEquipment(equipResponse.data)
         /* 불러온 장비를 슬롯별로 나누기 */
+        //04/27 장비 슬롯별로 나누기 수정중
         equipment.forEach(item => {
             const slotName = item.slot;
-            equipSlots[slotName].push(item);
+            console.log('item',item);
+            // JS 객체의 속성이름으로 문자열을 사용할떄 대괄호 표기법으로 해당 속성에 접근가능
+            if (equipSlots[slotName]){
+                equipSlots[slotName].push(item);
+            } else {
+                console.error(`invalid slot name${slotName}`);
+            }
+            console.log('equipslots',equipSlots);
         })
     }
 
