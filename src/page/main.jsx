@@ -11,9 +11,8 @@ const Main = () => {
     
     useEffect(()=>{
         action.setUser_id(state.player.id)
-        action.getEquipment()
     },[])
-
+    
     console.log('player',state.player);
     console.log('player.id',state.user_id);
     console.log('equipment',state.equipment);

@@ -67,8 +67,13 @@ const DataProvider = ({ children }) => {
         /** 장비를 불러오기위해 get()메소드의 두번쨰인자로 파라미터 넘겨줌 */
         const equipResponse = await axios.get('/api/item/equipment', { params: { user_id: user_id } });
         setEquipment(equipResponse.data)
-        /* 불러온 장비를 슬롯별로 나누기 */
-        //04/27 장비 슬롯별로 나누기 수정중
+    }
+    //유저id에 맞는 장비 불러오기 
+    useEffect(()=>{
+        getEquipment();
+    },[user_id])
+    /* 불러온 장비를 슬롯별로 나누기 */
+    const slot = ()=>{
         equipment.forEach(item => {
             const slotName = item.slot;
             console.log('item',item);
@@ -81,7 +86,12 @@ const DataProvider = ({ children }) => {
             console.log('equipslots',equipSlots);
         })
     }
-
+    
+    useEffect(()=>{
+        slot()
+    },[equipment])
+    // 05/03 장비슬롯별로 나누기 끝 
+    
     // 장비와 스텟의 합을 구하는 함수
     const totalStatus = () => {
         let atk = 0;
@@ -99,7 +109,7 @@ const DataProvider = ({ children }) => {
 
     const value = {
         state: { player, monster, weapons, isCallStat, login_id, login_pw, user_id, user_pw, user_name, hashed_password, login_name, armour, equipment ,equipSlots},
-        action: { setPlayer, setMonster, setWeapons, totalStatus, setIsCallStat, setLogin_id, setLogin_pw, setUser_id, setUser_pw, setUser_name, setHashed_password, setLogin_name, getEquipment }
+        action: { setPlayer, setMonster, setWeapons, totalStatus, setIsCallStat, setLogin_id, setLogin_pw, setUser_id, setUser_pw, setUser_name, setHashed_password, setLogin_name, getEquipment ,slot}
     };
 
     return (
