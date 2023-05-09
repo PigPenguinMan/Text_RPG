@@ -4,18 +4,17 @@ import Monster from "../component/monster";
 import Navbar from "../component/navbar";
 import Player from "../component/player";
 import DataContext from "../data/context";
-
-
+import styles from '../css/main.module.css';
 const Main = () => {
-    const {state , action} = useContext(DataContext)
-    
-    useEffect(()=>{
+    const { state, action } = useContext(DataContext)
+
+    useEffect(() => {
         action.setUser_id(state.player.id)
-    },[])
-    
-    console.log('player',state.player);
-    console.log('player.id',state.user_id);
-    console.log('equipment',state.equipment);
+    }, [])
+
+    console.log('player', state.player);
+    console.log('player.id', state.user_id);
+    console.log('equipment', state.equipment);
     // const progress= ()=>{
     //     console.log(`${monster.name} 에게 ${player.attack_power}만큼 피해를 줬습니다`);
     //     monster.hp -= player.attack_power
@@ -36,13 +35,18 @@ const Main = () => {
 
 
     return (
-        <div>
+        <div className={styles.main}>
+            <div className={styles.main_wrap}>
+                <div className={styles.status}>
+                    
+                </div>
+                <div className={styles.blank}> 공백 </div>
+                <div className={styles.board_wrap}>
+                    <div className={styles.board} >게시판</div>
+                    <div className={styles.chat} >채팅창</div>
+                </div>
+            </div>
 
-
-            메인페이지입니다
-            {/* <Player player={player} setPlayer={setPlayer} weapon={weapon} setWeapons={setWeapons}/> */}
-            {/* <Monster monster={monster}setMonster={setMonster}/> */}
-            {/* <button onClick={handleProgress}> 턴 진행 </button> */}
         </div>
     );
 }

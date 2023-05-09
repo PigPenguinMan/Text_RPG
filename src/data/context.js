@@ -89,7 +89,7 @@ const DataProvider = ({ children }) => {
     
     useEffect(()=>{
         slot()
-    },[equipment])
+    },[equipment]);
     // 05/03 장비슬롯별로 나누기 끝 
     
     // 장비와 스텟의 합을 구하는 함수
